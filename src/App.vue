@@ -11,7 +11,7 @@
 <style scoped lang="scss">
 div {
   h1 {
-    color:$base-color;
+    color: $base-color;
   }
 }
 </style>
