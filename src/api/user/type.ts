@@ -6,19 +6,20 @@ export interface loginFormData {
 }
 
 //定义全部接口返回数据都拥有ts类型
-export interface ResponseData {
-  code: number
-  message: string
-  ok: boolean
+export interface dataType {
+  token?: string
+  message?: string
 }
 
 //定义登录接口返回数据类型
-export interface loginResponseData extends ResponseData {
-  data: string
+export interface loginResponseData {
+  code: number
+  data: dataType
 }
 
 //定义获取用户信息返回数据类型
-export interface userInfoReponseData extends ResponseData {
+export interface userInfoReponseData {
+  code: number
   data: {
     routes: string[]
     buttons: string[]

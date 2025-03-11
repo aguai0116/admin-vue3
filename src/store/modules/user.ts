@@ -1,19 +1,21 @@
 import { defineStore } from 'pinia'
 import { reqLogin } from '@/api/user'
-import type { loginform } from '@/api/user/type'
+import type { loginform, loginResponseData } from '@/api/user/type'
+import type { UserState } from './types/type'
+import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
 
 let useUserStore = defineStore('User', {
-  state: () => {
+  state: (): UserState => {
     return {
-      token: localStorage.getItem('TOKEN'),
+      token: GET_TOKEN(),
     }
   },
   actions: {
     async userLogin(data: loginform) {
-      let result = await reqLogin(data)
+      let result: loginResponseData = await reqLogin(data)
       if (result.code == 200) {
-        this.token = result.data.token
-        localStorage.setItem('TOKEN', result.data.token)
+        this.token = result.data.token as string
+        SET_TOKEN(result.data.token as string)
         return 'ok'
       } else {
         return Promise.reject(new Error(result.data.message))
