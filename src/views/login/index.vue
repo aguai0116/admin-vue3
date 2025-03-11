@@ -3,16 +3,21 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_form">
+        <el-form
+          class="login_form"
+          :model="loginForm"
+          :rules="rules"
+          ref="loginForms"
+        >
           <h1>Hello</h1>
           <h2>欢迎来到硅谷甄选</h2>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input
               :prefix-icon="User"
               v-model="loginForm.username"
             ></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               type="password"
               :prefix-icon="Lock"
@@ -50,9 +55,13 @@ let loading = ref(false)
 
 let useStore = useUserStore()
 
+let loginForms = ref()
+
 let loginForm = reactive({ username: 'admin', password: '111111' })
 
 const login = async () => {
+  await loginForms.value.validate()
+
   loading.value = true
   try {
     await useStore.userLogin(loginForm)
@@ -70,6 +79,27 @@ const login = async () => {
       message: (error as Error).message,
     })
   }
+}
+
+const rules = {
+  username: [
+    {
+      required: true,
+      min: 6,
+      max: 10,
+      message: '账号长度最小为6位',
+      trigger: 'change',
+    },
+  ],
+  password: [
+    {
+      required: true,
+      min: 6,
+      max: 15,
+      message: '密码长度最小为6位',
+      trigger: 'change',
+    },
+  ],
 }
 </script>
 
