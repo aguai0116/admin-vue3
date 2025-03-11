@@ -1,5 +1,19 @@
 <script setup lang="ts">
-// import svgicon from "@/components/SvgIcon/index.vue"
+import request from '@/utils/request'
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  request({
+    url: '/user/login',
+    method: 'post',
+    data: {
+      username: 'admin',
+      password: '111111',
+    },
+  }).then((res) => {
+    console.log(res)
+  })
+})
 </script>
 
 <template>
@@ -8,10 +22,4 @@
   </div>
 </template>
 
-<style scoped lang="scss">
-div {
-  h1 {
-    color: $base-color;
-  }
-}
-</style>
+<style scoped></style>
