@@ -18,7 +18,7 @@ export const constantRoute = [
     meta: {
       title: 'layout',
       hidden: false,
-      icon: '',
+      icon: 'Avatar',
     },
     children: [
       {
@@ -26,15 +26,6 @@ export const constantRoute = [
         component: () => import('@/views/home/index.vue'),
         meta: {
           title: '首页',
-          hidden: true,
-          icon: 'HomeFilled',
-        },
-      },
-      {
-        path: '/ceshi',
-        component: () => import('@/views/home/index.vue'),
-        meta: {
-          title: '测试',
           hidden: false,
           icon: 'HomeFilled',
         },
@@ -60,6 +51,7 @@ export const constantRoute = [
     meta: {
       title: '任意理由',
       hidden: true,
+      icon: 'DataLine',
     },
   },
 ]
